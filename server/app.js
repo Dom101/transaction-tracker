@@ -4,15 +4,16 @@ import bodyParser from 'body-parser';
 import http from 'http';
 import dotenv from 'dotenv';
 
-import indexRouter from './routes/index';
+import indexRouter from './routes/signup';
 import userRouter from './routes/users';
 import initializeDatabase from './libs/database';
+import env from './libs/env';
 
 dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-const port = process.env.SERVER_PORT || 3000;
+const port = env.get('SERVER_PORT', 3000);
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
@@ -38,3 +39,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+export default app;

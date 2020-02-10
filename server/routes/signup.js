@@ -11,7 +11,7 @@ dotenv.config();
 const router = express.Router();
 
 /* GET inital route. */
-router.get('/', (req, res) => {
+router.get('/signup', (req, res) => {
   const uriOptions = qs.stringify({
     response_type: 'code',
     client_id: env.get('CLIENT_ID'),
@@ -27,14 +27,14 @@ router.get('/', (req, res) => {
 router.get('/callback', async (req, res) => {
   try {
     const { code } = req.query;
-    const token = await getToken(code);
 
+    const token = await getToken(code);
     const user = await createUserWithTransactions(token);
 
     res.set('Content-Type', 'text/plain');
 
     return res.status(200).send(`
-      Welcome ${user.name}! 
+      Welcome ${user.name}!
       We've added ${user.numberOfAccounts} account${user.numberOfAccounts > 1 ? 's' : ''}
       Here's your UserID: ${user.id}
     `);
