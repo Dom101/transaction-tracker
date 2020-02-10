@@ -31,7 +31,7 @@ Sequelize is used as wrapper which is a promise based ORM and supports multiple 
 The data is stored in 3 tables **Users** **Accounts** **Transactions**
 * Users table stores the name of the user
 * Accounts table stores all of the account data from TrueLayer and the UserID
-* Transactions table stores all of the transaction data from TrueLayer and the AccountID\
+* Transactions table stores all of the transaction data from TrueLayer and the AccountID
 
 ### Running the server
 
