@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import { getToken } from '../libs/truelayer';
 import { createUserWithTransactions } from '../libs/utils';
+import env from '../libs/env';
 
 dotenv.config();
 
@@ -13,13 +14,13 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const uriOptions = qs.stringify({
     response_type: 'code',
-    client_id: process.env.CLIENT_ID,
+    client_id: env.get('CLIENT_ID'),
     scope: 'info accounts balance cards transactions direct_debits offline_access',
-    redirect_uri: process.env.REDIRECT_URI,
+    redirect_uri: env.get('REDIRECT_URI'),
     providers: 'uk-ob-all uk-oauth-all uk-cs-mock',
   });
 
-  const url = `https://auth.${process.env.TRUELAYER_DOMAIN}.com/?${uriOptions}`;
+  const url = `https://auth.${env.get('TRUELAYER_DOMAIN')}.com/?${uriOptions}`;
   res.redirect(url);
 });
 
